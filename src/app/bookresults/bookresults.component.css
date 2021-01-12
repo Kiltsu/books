@@ -1,3 +1,4 @@
-mat-grid-tile {
+.mat-grid-tile {
   background: lightblue;
+  margin: 25px;
 }

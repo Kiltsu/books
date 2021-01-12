@@ -1,9 +1,16 @@
 <p>bookresults works!</p>
-<mat-grid-list cols="2" rowHeight="2:1" >
-  <mat-grid-tile>1</mat-grid-tile>
-  <mat-grid-tile>2</mat-grid-tile>
-  <mat-grid-tile>3</mat-grid-tile>
-  <mat-grid-tile>4</mat-grid-tile>
-  <mat-grid-tile>5</mat-grid-tile>
-  <mat-grid-tile>6</mat-grid-tile>
+<mat-paginator [length]="100"
+               [pageSize]="100"
+               [pageSizeOptions]="[100]">
+</mat-paginator>
+<mat-grid-list [cols]="columns" rowHeight="2:1" (window:resize)="onResize($event)" *ngFor="let book of books; index as i;">
+  <mat-grid-tile>
+    <div>
+      <span>Title</span><span>{{book.title}}</span>
+    </div>
+    <div>
+      <span>Year</span><span>{{book.first_publish_year}}</span>
+    </div>
+  </mat-grid-tile>
 </mat-grid-list>
+<div>results for {{ searchTerm }}</div>

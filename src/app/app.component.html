@@ -1,8 +1,6 @@
 <div class="content" role="main">
+  <app-booksearch (search)="onSearch($event)"></app-booksearch>
   <div>
-    <span>Search for books</span><span></span>
-  </div>
-  <div>
-    <app-bookresults></app-bookresults>
+    <app-bookresults [searchTerm]="search"></app-bookresults>
   </div>
 </div>
