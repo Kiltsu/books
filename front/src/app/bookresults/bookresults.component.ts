@@ -1,8 +1,9 @@
-import {Component, Input, OnInit, EventEmitter, Output} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Book} from '../model/book';
 import {BooksService} from '../services/books.service';
-import {Observable} from 'rxjs';
 import {PageEvent} from '@angular/material/paginator';
+import {MatDialog} from '@angular/material/dialog';
+import {BookdialogComponent} from './bookdialog';
 
 @Component({
   selector: 'app-bookresults',
@@ -16,11 +17,14 @@ export class BookresultsComponent implements OnInit {
   pageSize = 10;
   page = 0;
 
-  constructor(private bookService: BooksService) { }
+  constructor(private bookService: BooksService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
 
+  /*
+    search term is given as input to the component, when it changes the component displays found books.
+   */
   @Input()
   get searchTerm(): string{
     return this.search;
@@ -41,6 +45,14 @@ export class BookresultsComponent implements OnInit {
     this.pageSize = event.pageSize;
     this.takeBooksOnPage();
   }
+
+  openFullCover(index: number): void {
+    this.dialog.open(BookdialogComponent, {data: {
+      title: this.booksOnPage[index].title,
+      url: this.booksOnPage[index].cover_i
+    }});
+  }
+
 
   takeBooksOnPage(): void {
     this.booksOnPage = this.books.slice(this.page * this.pageSize, this.page * this.pageSize + this.pageSize);

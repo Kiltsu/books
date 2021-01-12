@@ -1,3 +1,23 @@
-ng-container {
+.ng-container {
   padding: 2em;
+}
+
+button {
+  background: #9C02A7;
+  margin: 2em;
+  padding: 0.5em;
+}
+
+.mat-icon {
+  font-size: 2em;
+  width: 1em;
+  height: 1em;
+}
+
+input[type="text"] {
+  font-size: 1.4em;
+}
+
+button:hover {
+  background: #65016C;
 }

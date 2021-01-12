@@ -1,25 +1,44 @@
 <div>
-  <mat-paginator [length]="books.length"
-    [pageSize]="pageSize"
-    [pageSizeOptions]="[10,20,50]"
-    (page)="changePage($event)">
-  </mat-paginator>
-  <div class="grid">
-    <div *ngFor="let book of booksOnPage; index as i;" class="grid-block">
-      <p>
-        <img *ngIf="book.cover_i != null && book.cover_i != 0" src="{{ 'http://covers.openlibrary.org/b/id/' + book.cover_i.toString()+ '-S.jpg' }}">
-      </p>
-      <h2>
-        {{book.title}}
-      </h2>
-      <p *ngIf="book.first_publish_year != 0">
-        {{book.first_publish_year}}
-      </p>
+<mat-paginator [length]="books.length"
+               [pageSize]="pageSize"
+               [pageSizeOptions]="[10,20,50]"
+               (page)="changePage($event)">
+</mat-paginator>
+<mat-tab-group>
+  <mat-tab label="Grid" dynamicHeight>
+    <div class="grid">
+      <div *ngFor="let book of booksOnPage; index as i;" class="grid-block">
+        <p>
+          <img *ngIf="book.cover_i != null && book.cover_i != 0 && book.cover_i.toString().trim() != ''"
+               src="{{ 'http://covers.openlibrary.org/b/id/' + book.cover_i.toString()+ '-S.jpg' }}"
+               (click)="openFullCover(i)" alt="no image">
+        </p>
+        <h2>
+          {{book.title}}
+        </h2>
+        <p *ngIf="book.first_publish_year != 0">
+          {{book.first_publish_year}}
+        </p>
+      </div>
     </div>
-  </div>
-  <mat-paginator *ngIf="booksOnPage.length > 20" [length]="books.length"
-                 [pageSize]="pageSize"
-                 [pageSizeOptions]="[10,20,50]"
-                 (page)="changePage($event)">
-  </mat-paginator>
+  </mat-tab>
+  <mat-tab label="List" dynamicHeight>
+    <div>
+      <div *ngFor="let book of booksOnPage; index as i;" class="list-item">
+        <div><img *ngIf="book.cover_i != null && book.cover_i != 0 && book.cover_i.toString().trim() != ''"
+                   src="{{ 'http://covers.openlibrary.org/b/id/' + book.cover_i.toString()+ '-S.jpg' }}"
+                   (click)="openFullCover(i)" alt="no image"></div><div>
+          Title: {{book.title}}
+        </div>
+        <div *ngIf="book.author_name != null && book.author_name.length > 0">Author: {{book.author_name[0]}}</div>
+        <div *ngIf="book.isbn != null && book.isbn.length > 0">ISBN: {{book.isbn[0]}}</div>
+      </div>
+    </div>
+  </mat-tab>
+</mat-tab-group>
+<mat-paginator *ngIf="booksOnPage.length > 20" [length]="books.length"
+               [pageSize]="pageSize"
+               [pageSizeOptions]="[10,20,50]"
+               (page)="changePage($event)">
+</mat-paginator>
 </div>
