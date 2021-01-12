@@ -1,16 +1,25 @@
-<p>bookresults works!</p>
-<mat-paginator [length]="100"
-               [pageSize]="100"
-               [pageSizeOptions]="[100]">
-</mat-paginator>
-<mat-grid-list [cols]="columns" rowHeight="2:1" (window:resize)="onResize($event)" *ngFor="let book of books; index as i;">
-  <mat-grid-tile>
-    <div>
-      <span>Title</span><span>{{book.title}}</span>
+<div>
+  <mat-paginator [length]="books.length"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="[10,20,50]"
+    (page)="changePage($event)">
+  </mat-paginator>
+  <div class="grid">
+    <div *ngFor="let book of booksOnPage; index as i;" class="grid-block">
+      <p>
+        <img *ngIf="book.cover_i != null && book.cover_i != 0" src="{{ 'http://covers.openlibrary.org/b/id/' + book.cover_i.toString()+ '-S.jpg' }}">
+      </p>
+      <h2>
+        {{book.title}}
+      </h2>
+      <p *ngIf="book.first_publish_year != 0">
+        {{book.first_publish_year}}
+      </p>
     </div>
-    <div>
-      <span>Year</span><span>{{book.first_publish_year}}</span>
-    </div>
-  </mat-grid-tile>
-</mat-grid-list>
-<div>results for {{ searchTerm }}</div>
+  </div>
+  <mat-paginator *ngIf="booksOnPage.length > 20" [length]="books.length"
+                 [pageSize]="pageSize"
+                 [pageSizeOptions]="[10,20,50]"
+                 (page)="changePage($event)">
+  </mat-paginator>
+</div>

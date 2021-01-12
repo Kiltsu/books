@@ -10,6 +10,7 @@ import { BooksearchComponent } from './booksearch/booksearch.component';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {BooksService} from './services/books.service';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import {BooksService} from './services/books.service';
     MatPaginatorModule,
     FormsModule,
     HttpClientModule,
+    MatIconModule,
   ],
   providers: [HttpClientModule, BooksService],
   bootstrap: [AppComponent]
