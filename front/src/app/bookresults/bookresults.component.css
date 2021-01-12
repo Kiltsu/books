@@ -59,11 +59,18 @@
   width: 100%;
   text-align: center;
 }
-
+.mat-tab {
+  min-height: 70%;
+}
 
 @media screen and (max-width: 1280px) {
   .grid {
     grid-template-columns: repeat(1, 1fr);
+
+  }
+  .grid-block {
+    max-width: 960px;
+    width: 80%;
   }
 }
 
